@@ -1,0 +1,42 @@
+# Default values for fastapi, nginx, mariadb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  fastapi:
+    repository: nanakia1031/k8s-fastapi
+    tag: v2
+  nginx:
+    repository: nanakia1031/k8s-fanginx
+    tag: v2
+  mariadb:
+    repository: mariadb
+    tag: 10.6.19-focal
+
+service:
+  fastapi:
+    port: 8000
+    targetPort: 8000
+  nginx:
+    port: 80
+    targetPort: 80
+  mariadb:
+    port: 3306
+    targetPort: 3306
+
+mariadb:
+  storage: {}
+  secretName: helm-mariadb-secret
+
+deployment:
+    mariadb:
+      name: helm-mariadb106-deploy
+      app: helm-mariadb106
+    fastapi:
+      name: helm-fastapi-deploy
+      app: helm-fastapi
+    nginx:
+      name: helm-fanginx-deploy
+      app: helm-fanginx
